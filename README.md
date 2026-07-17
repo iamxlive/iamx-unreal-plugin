@@ -50,7 +50,7 @@
 | 📖 | **Narrative / Scenario design** | A no-code visual graph editor for goals, decisions and branching, mission-driven dialogue. |
 | 📚 | **Knowledge base (RAG)** | Your character answers from *your* documents, not the open internet. |
 | 🙋 | **Long-term memory** | Recognizes returning people and remembers past sessions — across days, not turns. |
-| ⚡ | **Actions in your world** | *"Go grab that axe"* / *"play the wave animation"* — it walks, fetches, follows and plays animations on command, and can also call your APIs (bookings, lookups, e-mail). |
+| ⚡ | **Actions in your world** | *"Bring me that coffee mug"* / *"give everyone a wave"* — it walks, fetches, follows and plays animations on command, and can also call your APIs (bookings, lookups, e-mail). |
 | 📡 | **Live streaming** | Run your character as an always-on AI stream host with a moderated queue and operator console. |
 | 🎙️ | **Podcast mode** | Two characters hold an unscripted conversation with each other — on any topic you set. |
 | 👥 | **Multi-character scenes** | Several characters per level; only the one you're near answers. They can even talk to each other. |
@@ -130,21 +130,21 @@ Two directions: your character can **act inside your world**, and it can **reach
 
 This is the fun part. Talk to your character in plain language and it **physically responds in the level** — walks, fetches, follows, plays animations, triggers your game logic. No dialogue trees, no command syntax — it understands intent.
 
-> **You:** *"Hey, go grab that axe on the table."*
-> → the character turns, walks over to the axe, and picks it up.
+> **You:** *"Grab that coffee mug from the counter and bring it over."*
+> → the character walks to the mug, picks it up, and brings it to you.
 
-> **You:** *"Do a little victory dance."*
-> → it plays your victory animation.
+> **You:** *"Give everyone a wave."*
+> → it plays your wave animation.
 
 Three pieces you wire once, then it just works:
 
 1. **Tell it what's around it** — register the things it can act on:
-   `Register Scene Actor(AxeActor, "a battle axe on the table")`. Now the AI knows what *"the axe"* means and which actor it maps to. (`Register Scene Object`, `Set Attention Object` do the same for props and focus.)
-2. **Give it abilities** — movement is **built in** and ready out of the box (**move to / follow / stop / wait**). Add your own game-specific actions with `Register Action` at runtime (or the **Local Action Tools** list in the editor's details panel) — `pick_up`, `play_animation`, `open_door`, `cast_spell`, whatever your game needs.
+   `Register Scene Actor(MugActor, "a coffee mug on the counter")`. Now the AI knows what *"the mug"* means and which actor it maps to. (`Register Scene Object`, `Set Attention Object` do the same for props and focus.)
+2. **Give it abilities** — movement is **built in** and ready out of the box (**move to / follow / stop / wait**). Add your own project-specific actions with `Register Action` at runtime (or the **Local Action Tools** list in the editor's details panel) — `pick_up`, `hand_over`, `play_animation`, `open_door`, `highlight_product`, whatever your scene needs.
 3. **Implement the payoff in Blueprint** — the AI decides *when* to act and *on what target*, then fires a Blueprint event with the resolved actor already plugged in:
-   - `On Action Move To (Target, "axe")` → drive your nav / `AI MoveTo`.
-   - `On Action Custom ("pick_up", params, Target, "axe")` → attach the axe to the hand.
-   - `On Action Custom ("play_animation", {"name":"victory"}, …)` → play the montage (or just call `Play Gesture`).
+   - `On Action Move To (Target, "mug")` → drive your nav / `AI MoveTo`.
+   - `On Action Custom ("pick_up", params, Target, "mug")` → attach the mug to the hand.
+   - `On Action Custom ("play_animation", {"name":"wave"}, …)` → play the montage (or just call `Play Gesture`).
 
 The whole **natural language → intent → target actor → Blueprint call** chain is handled for you — you only implement what each action actually *does*. Every decoded action also lands in an inspectable **Action Queue** and fires `On Action Received`, so you can sequence, gate or animate around them.
 
