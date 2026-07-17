@@ -5,8 +5,9 @@
 <h1 align="center">Bring your characters to life.</h1>
 
 <p align="center">
-  <b>IAMX turns any MetaHuman into a living, thinking digital human</b> — one that hears you, looks you in the eye,<br>
-  answers in real time with perfectly synced lips, remembers you tomorrow, and can actually <i>do</i> things.
+  <b>IAMX turns any character — a MetaHuman or your own custom rig — into a living, thinking digital human</b><br>
+  that hears you, looks you in the eye, answers in real time with perfectly synced lips,<br>
+  remembers you tomorrow, and can actually <i>do</i> things.
 </p>
 
 <p align="center">
@@ -26,37 +27,59 @@
 ---
 
 > ### ⚠️ v1 **ALPHA**
-> This is the first public release of IAMX. It works — we run it in production kiosks and live streams — but you *will* find rough edges.
-> **Your feedback genuinely shapes this product.** Every bug report and feature request gets read: [open an issue](../../issues/new/choose) or post on the [forum](https://iamx.live/forum) — it matters more than you think. 💜
+> This is the first public release of IAMX. It works — we run it in production kiosks, live streams and demos — but you *will* find rough edges.
+> **Your feedback genuinely shapes this product.** Every bug report and feature request gets read and prioritized: [open an issue](../../issues/new/choose) or post on the [forum](https://iamx.live/forum). It matters more than you think. 💜
 
 ---
 
 <p align="center">
-  <img src="docs/hero-avatar.jpg" alt="IAMX MetaHuman digital human" width="72%">
+  <img src="docs/hero-avatar.jpg" alt="IAMX digital human" width="72%">
 </p>
 
 ## ✨ What you get
 
 | | Feature | What it means |
 |---|---------|---------------|
+| 🧍 | **Any avatar, not just MetaHuman** | MetaHuman works out of the box — and so does *your* character: Character Creator 3/4, iClone, Daz, Ready Player Me, or any skeletal mesh with blend shapes. |
 | 🗣️ | **Real-time voice conversation** | Two-way, streamed, interruptible (barge-in). Speak — it answers in seconds, in 30+ languages. |
-| 👄 | **Real-time lip sync** | The character's mouth and full facial performance follow every word — on MetaHumans or your own custom rig. |
+| 👄 | **Real-time lip sync + retarget** | The full facial performance follows every word — on MetaHumans *or* remapped onto your own rig's blend shapes. |
 | 👁️ | **Eye & head tracking** | The character finds your camera and holds eye contact while you talk, like a person would. |
 | 🧠 | **Your choice of AI brain** | GPT, Claude, Gemini (including Gemini Live realtime) or local Ollama — swappable per character from the panel. |
-| 📷 | **Camera vision** | The character sees through a camera and reacts to what's in front of it. |
-| 🎭 | **Emotion engine** | An 8-dimensional emotional core drives face, voice tone and gestures. |
-| 📖 | **Scenario Studio** | No-code visual graph editor for goals, decisions and branching dialogue. |
+| 📷 | **Camera vision** | The character sees through a camera and reacts to what's actually in front of it. |
+| 🎭 | **Emotion engine** | An 8-dimensional emotional core drives face, voice tone and gestures — and it changes as you talk. |
+| 📖 | **Narrative / Scenario design** | A no-code visual graph editor for goals, decisions and branching, mission-driven dialogue. |
 | 📚 | **Knowledge base (RAG)** | Your character answers from *your* documents, not the open internet. |
 | 🙋 | **Long-term memory** | Recognizes returning people and remembers past sessions — across days, not turns. |
-| ⚡ | **Actions** | Function calling into your APIs — bookings, lookups, e-mail, calendar, messaging. |
-| 📡 | **Live streaming** | Run your character as an always-on AI stream host with an operator console. |
-| 🎙️ | **Podcast mode** | Two NPCs hold an unscripted conversation with each other — on any topic you set. |
-| 👥 | **Multi-NPC scenes** | Several characters per level; only the one you're near answers. |
-| 🖥️ | **Every surface** | Game NPC, 24/7 kiosk, one-line web embed, or cloud-streamed MetaHuman. |
+| ⚡ | **Actions** | Function calling into your APIs and your Blueprints — bookings, lookups, e-mail, calendar, in-game behavior. |
+| 📡 | **Live streaming** | Run your character as an always-on AI stream host with a moderated queue and operator console. |
+| 🎙️ | **Podcast mode** | Two characters hold an unscripted conversation with each other — on any topic you set. |
+| 👥 | **Multi-character scenes** | Several characters per level; only the one you're near answers. They can even talk to each other. |
+| 🖥️ | **Every surface** | Game NPC, 24/7 kiosk, one-line web embed, or cloud-streamed photoreal MetaHuman. |
 
 Everything is configured live from the **[IAMX panel](https://iamx.live)** — save in the panel, see it in the character's next reply. No rebuilds, no redeploys.
 
-> 🧩 **How it works:** the plugin is a lightweight client. All AI runs in the IAMX cloud and streams back into Unreal — your project stays lean, your machine stays cool, and every improvement we ship lands server-side without touching your build.
+> 🧩 **How it works:** the plugin is a lightweight client. The heavy AI runs in the IAMX cloud and streams back into Unreal frame-by-frame — your project stays lean, your machine stays cool, and every improvement we ship lands server-side without touching your build.
+
+---
+
+## 🧍 Works with *any* avatar — MetaHuman or your own
+
+This is the part most tools get wrong. **IAMX is not MetaHuman-only.**
+
+- **MetaHuman** — drop it in, it just works. The full face rig (jaw, lips, cheeks, brows) is driven for you.
+- **Your own character** — Character Creator **3 / 4**, iClone, Daz, Ready Player Me, VRoid, a hand-sculpted hero, a stylized creature… if the mesh has **blend shapes / morph targets**, IAMX can drive its face.
+
+### How the retarget works
+
+The cloud sends a stream of neutral, rig-agnostic facial controls (visemes + expression signals). IAMX applies them either to the built-in MetaHuman controls **or**, for a custom character, to **your** blend-shape names through a simple mapping you fill in once on the component:
+
+- Tick **`Use Custom Character Mapping`** on the IAMX component.
+- Fill **`Custom Blend Shape Mapping`** — a table of *IAMX control → your mesh's blend-shape name* (e.g. `jawOpen → Merged_Open_Mouth`, `mouthSmile → A25_Jaw_Open`…). Character Creator and ARKit-style rigs map in minutes.
+- Lip sync is written straight to your morph targets, so it layers cleanly over your existing body animation and state machines.
+
+The result: **the same character you designed — voice, look, personality — talks and emotes with studio-grade lip sync, on whatever rig you already have.** No re-topology, no MetaHuman conversion.
+
+> 💡 Eye and head tracking also work on custom rigs; for non-standard skeletons you point the look-at nodes at your own bones/controls.
 
 ---
 
@@ -77,34 +100,36 @@ Everything is configured live from the **[IAMX panel](https://iamx.live)** — s
 
 ## 🎭 A face that acts, not just talks
 
-- **Lip sync** streams from the cloud frame-by-frame, driving the full MetaHuman facial rig — jaw, lips, cheeks, brows — not just an open/close mouth.
-- **Eyes and head** track the player's camera with natural limits and smoothing (two AnimGraph nodes, non-destructive over your existing animation).
-- **Emotion engine:** every character carries an 8-axis emotional state (joy, trust, fear, surprise, sadness, disgust, anger, anticipation) that *decays over time* and *shifts with the conversation*. Mood drives facial expression, voice tone **and** body gestures — call your character rude and watch its face change.
-- **Custom characters welcome:** not using MetaHumans? Map the facial controls to your own rig's blend shapes and everything works the same.
+- **Lip sync** streams from the cloud frame-by-frame and drives the **full** facial performance — jaw, lips, cheeks, brows — not just an open/close mouth. Works on MetaHuman controls or your custom blend shapes.
+- **Eyes and head** track the player's camera with natural limits and smoothing — three AnimGraph nodes that blend *non-destructively* on top of your existing animation.
+- **Emotion engine:** every character carries an 8-axis emotional state (joy, trust, fear, surprise, sadness, disgust, anger, anticipation) that **decays over time** and **shifts with the conversation**. Mood drives facial expression, voice tone **and** body gestures — call your character rude and watch its face change. You can also read or nudge the emotional state from Blueprint.
+- **Gestures:** conversation-driven body gestures fire automatically, and you can trigger your own from Blueprint (`Play Gesture`).
 
-## 📖 Scenario Studio — direct your character
+## 📖 Narrative & Scenario Design — direct your character
 
-A **no-code visual graph editor** for narrative design, right in the panel:
+A **no-code visual graph editor**, right in the panel, for building guided, mission-driven characters instead of an open-ended chatbot:
 
-- Chain **sections** with goals ("greet the visitor → qualify their need → book a demo").
-- Add **decision branches** the AI evaluates from the conversation itself.
-- Fire **triggers** into your game or website when a branch is reached.
-- The character stays in-character and on-mission — it improvises the words, you control the story.
+- Chain **sections**, each with a goal — *"greet the visitor → understand their need → book a demo."*
+- Add **decision branches** the AI evaluates from the conversation itself — no scripting, it reads intent.
+- Fire **triggers** into your game or website the moment a branch is reached (wire them to `On NPC Event` / `On Action Triggered` in Blueprint).
+- The character **stays in-character and on-mission** — it improvises the exact words, you own the story and the outcome.
 
-Perfect for guided sales flows, museum tours, quest-giving NPCs and training simulations.
+Perfect for guided sales flows, museum & showroom tours, quest-giving NPCs, onboarding assistants and training simulations. This is the difference between "a character that chats" and "a character that *runs your scenario*."
 
 ## 📚 Knowledge & memory
 
-- **Knowledge base (RAG):** upload PDF / TXT / CSV — even images — and your character grounds its answers in *your* content. Ask a question covered by your docs, get your answer, not an internet guess. Files are managed per tenant and toggled per character.
-- **Long-term memory:** the character summarizes each session and remembers returning visitors — "Welcome back! Last time you asked about pricing…" works across days.
+- **Knowledge base (RAG):** upload PDF / TXT / CSV — even images — and your character grounds its answers in *your* content. Ask something covered by your docs, get *your* answer, not an internet guess. Files are managed per account and toggled per character.
+- **Long-term memory:** the character summarizes each session and remembers returning visitors — *"Welcome back! Last time you asked about pricing…"* — across days, not just the current chat.
 - **Face recognition** *(paid plans)*: on kiosks, it recognizes returning people by face and greets them by name.
 
-## ⚡ Actions — a character that does things
+## ⚡ Actions — a character that *does* things
 
-- **Function calling** on every supported model: define tools in the panel, the AI decides when to call them.
-- **Your APIs:** wire HTTP GET/POST actions — the character fetches live data (weather, stock, order status) and answers naturally.
-- **Assistant actions:** e-mail, calendar, Telegram, WhatsApp out of the box.
-- **Blueprint events:** every action, reply and lifecycle moment fires delegates in Unreal (`OnResponseReady`, `OnNPCEvent`, `OnActionTriggered`…), so your game logic can react to anything the character says or does — and you can define custom actions the AI triggers in your Blueprints.
+IAMX characters can take real action, in two directions:
+
+- **Into your APIs** — define HTTP GET/POST actions in the panel; the AI decides when to call them and answers naturally with the result (weather, stock, order status, your backend).
+- **Into your Unreal project** — define **custom actions from Blueprint** (`Register Action`) and the AI triggers them in-world: move to, follow, play an animation, open a door, whatever you wire up.
+- **Assistant actions:** e-mail, calendar, Telegram and WhatsApp out of the box.
+- **Everything is an event:** replies, sentences, transcriptions, actions and lifecycle moments all fire Blueprint delegates, so your game logic can react to anything the character says or does. See the [Blueprint API](#-blueprint-api-quick-reference) below.
 
 ## 📡 Live streaming & podcast mode
 
@@ -112,13 +137,13 @@ Perfect for guided sales flows, museum tours, quest-giving NPCs and training sim
   <img src="docs/stage.jpg" alt="IAMX AI stream host on stage" width="72%">
 </p>
 
-- **AI stream host:** run your character 24/7 as a live streamer. Viewer messages flow through a **moderated queue** — an operator console lets you approve, prioritize or inject messages while the character performs.
-- **Podcast mode (NPC ↔ NPC):** two characters talk *to each other*, unscripted, on a topic you set — each with its own personality, voice and opinions. Great for AI talk shows, debates and background world-building.
+- **AI stream host:** run your character 24/7 as a live streamer. Viewer messages flow through a **moderated queue** — an operator console lets you approve, prioritize, reorder or inject messages while the character performs.
+- **Podcast mode (NPC ↔ NPC):** two characters talk *to each other*, unscripted, on a topic you set — each with its own personality, voice and opinions. Drop in audience comments live. Great for AI talk shows, debates and background world-building.
 - **Operator console:** watch the conversation live, steer it, and step in at any moment from the panel.
 
 ## 👥 Multi-character scenes
 
-Put five characters in one level — each with its own personality, voice, model and knowledge. **Proximity gating** means only the NPC you're standing near hears you; the rest mind their own business. Characters can even talk to each other (NPC-to-NPC).
+Put five characters in one level — each with its own personality, voice, model and knowledge. **Proximity gating** means only the NPC you're standing near hears you; the rest mind their own business. Characters can even hold conversations with **each other** (NPC-to-NPC).
 
 <p align="center">
   <img src="docs/cast.jpg" alt="IAMX characters" width="90%">
@@ -131,12 +156,12 @@ The same character you build for Unreal also runs:
 
 - **On your website** — one line of embed code, browser-native 3D avatar with voice.
 - **As a LiveFace avatar** — a talking head from a single photo.
-- **As a cloud MetaHuman** — photoreal pixel-streamed straight to the browser, no install *(paid plans)*.
+- **As a cloud MetaHuman** — photoreal, pixel-streamed straight to the browser, no install *(paid plans)*.
 - **On 24/7 kiosks** — with identity verification and verified actions for regulated industries *(enterprise)*.
 
 ## 🎛️ The panel — mission control
 
-Everything lives at **[iamx.live](https://iamx.live)**: character personality, voice, AI model, features, knowledge files, scenarios, usage analytics and conversation reports. Change anything → the running character picks it up on the next session. **No rebuilds. Ever.**
+Everything lives at **[iamx.live](https://iamx.live)**: personality, voice, AI model, features, knowledge files, scenarios, usage analytics and conversation reports. Change anything → the running character picks it up on its next session. **No rebuilds. Ever.**
 
 ▶ **See it live:** create a free account at **[iamx.live](https://iamx.live)** and talk to your first character in the browser playground before you even open Unreal.
 
@@ -183,40 +208,91 @@ Open the project — that's it. **The packages ship prebuilt Win64 binaries, so 
 
 1. Sign up free at **[iamx.live](https://iamx.live)**.
 2. Create a character: personality, voice, language, AI model, features.
-3. Copy the character's connection ID from the panel.
+3. Copy the character's **connection ID** from the panel.
 
-### 3 — Wire up your MetaHuman
+### 3 — Add the IAMX component
 
-1. Drop a MetaHuman into your level.
+1. Drop your character into the level (a MetaHuman, or your own avatar actor).
 2. Select it → **Add Component → IAMX**.
-3. Paste your character's connection ID into the IAMX component.
+3. Paste your character's **connection ID** into the IAMX component's details.
+4. Pick an **interaction mode** (Push-to-talk / Voice-activated / Wake word / Proximity).
+5. *Custom (non-MetaHuman) avatar?* Tick **Use Custom Character Mapping** and fill the **Custom Blend Shape Mapping** table (see [Works with any avatar](#-works-with-any-avatar--metahuman-or-your-own)).
 
 ### 4 — Add the animation nodes
 
-The plugin ships three AnimGraph nodes (search for **"IAMX"** in any AnimGraph's right-click menu):
+The plugin ships three AnimGraph nodes (right-click in any AnimGraph and search **"IAMX"**):
 
 **Face Animation Blueprint** (e.g. `Face_AnimBP`) — add **two** nodes, chained before the Output Pose:
 
 ```
-[Input / existing pose] → [IAMX Lip Sync] → [IAMX Eye Look At] → [Output Pose]
+[ existing pose ] → [ IAMX Lip Sync ] → [ IAMX Eye Look At ] → [ Output Pose ]
 ```
 
 - **IAMX Lip Sync** — applies the streamed facial performance (mouth, jaw, expressions) on top of the incoming pose.
 - **IAMX Eye Look At** — makes the eyes find and track the player's camera during conversation.
 
-**Body Animation Blueprint** (the MetaHuman's body AnimBP) — add **one** node the same way:
+**Body Animation Blueprint** (your character's body AnimBP) — add **one** node the same way:
 
 ```
-[Input / existing pose] → [IAMX Head Look At] → [Output Pose]
+[ existing pose ] → [ IAMX Head Look At ] → [ Output Pose ]
 ```
 
 - **IAMX Head Look At** — turns the head (with natural limits and smoothing) toward the player while talking.
 
-> 💡 Both edits are non-destructive: the IAMX nodes blend on top of whatever animation is already playing (idle, talk gestures, your own state machines).
+> 💡 All three edits are non-destructive: the IAMX nodes blend on top of whatever animation is already playing (idle, talk gestures, your own state machines).
 
-### 5 — Press Play
+### 5 — Start the conversation ⭐ (don't skip this)
 
-Press **T** (default, configurable) and talk. Or enable **voice-activated** / **proximity** mode on the component and just walk up to your character.
+The character connects to its cloud brain when you call **Start Conversation** — this is the one wire people miss. In your character's Blueprint (or the Level Blueprint):
+
+```
+Event BeginPlay ──▶ [ IAMX (component) ] ──▶ Start Conversation
+```
+
+That's it — one node off `Event BeginPlay`. From here you can also call `Start Listening`, `Send Text Input`, `Interrupt Speech`, and bind events like `On Response Ready` (see below). Call **End Conversation** when you want the character to disconnect.
+
+### 6 — Press Play
+
+In Push-to-talk mode, press **T** (default, configurable) and talk. In Voice-activated or Proximity mode, just speak / walk up to your character.
+
+---
+
+## 🔌 Blueprint API quick reference
+
+Everything is exposed to Blueprint — no C++ required. The essentials:
+
+**Call these (on the IAMX component):**
+
+| Node | Does |
+|------|------|
+| `Start Conversation` / `End Conversation` | Connect to / disconnect from the cloud brain. |
+| `Start Listening` / `Stop Listening` | Manually open/close the mic. |
+| `Send Text Input` | Feed text instead of voice (chat box, quests, triggers). |
+| `Interrupt Speech` | Cut the character off mid-sentence. |
+| `Is In Conversation` / `Is Speaking` / `Is Listening` / `Is Processing` | State queries for your UI/logic. |
+| `Set Mood` / `Set Context Fact` | Nudge personality or inject a runtime fact ("the store closes at 6"). |
+| `Register Action` / `Unregister Action` | Define custom, AI-callable actions that fire in *your* Blueprint. |
+| `Register Scene Object` / `Set Attention Object` | Tell the character what's around it and what to focus on. |
+| `Play Gesture` | Trigger a body gesture. |
+| `Force Set Emotion` / `Reset Emotion` / `Get Emotion Score` | Read or drive the 8-axis mood. |
+| `Start Podcast` / `Start Npc Conversation` | Kick off podcast mode / an NPC-to-NPC chat. |
+| `Update Character` / `Load From Panel API` | Hot-reload the character's panel config at runtime. |
+
+**Bind to these events:**
+
+| Event | Fires when |
+|-------|-----------|
+| `On Conversation Started` / `On Conversation Ended` | The session opens / closes. |
+| `On Speaking Started` / `On Speaking Stopped` | The character starts / finishes talking. |
+| `On Listening Started` / `On Listening Stopped` | The mic opens / closes. |
+| `On Response Ready` | A full reply is ready. |
+| `On Sentence Spoken` | Each sentence, as it's voiced (great for subtitles). |
+| `On Player Speech Transcribed` | The user's speech has been transcribed. |
+| `On Action Triggered` / `On Action Received` | The AI called one of your actions. |
+| `On Emotion State Changed` | The 8-axis mood updated. |
+| `On Person Detected` / `On Person Gone` | Face recognition sees / loses a person *(paid)*. |
+| `On Identity Verified` | ID + face match completed *(enterprise)*. |
+| `On Perceived Object` / `On Attention Changed` | The character noticed something / shifted focus. |
 
 ---
 
@@ -229,8 +305,8 @@ Press **T** (default, configurable) and talk. Or enable **voice-activated** / **
 ## 🐞 Known alpha limitations
 
 - Win64 only (other platforms on the roadmap)
-- MetaHuman rigs are first-class; custom rigs work via blend-shape mapping but need manual setup
-- Documentation is still growing — when in doubt, [ask](../../issues)
+- MetaHuman rigs are one-click; custom rigs work great but need the blend-shape mapping filled in once
+- Documentation is still growing — when in doubt, [ask](../../issues); it also tells us what to write next
 
 ---
 
