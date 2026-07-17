@@ -1,0 +1,46 @@
+name: Bug report
+description: Something in the IAMX plugin isn't working
+labels: [bug]
+body:
+  - type: input
+    id: engine
+    attributes:
+      label: Unreal Engine version
+      placeholder: "5.7"
+    validations:
+      required: true
+  - type: dropdown
+    id: area
+    attributes:
+      label: Area
+      options:
+        - Voice / microphone
+        - Audio playback
+        - Lip sync
+        - Character / animation
+        - Panel connection
+        - Installation / build
+        - Other
+    validations:
+      required: true
+  - type: textarea
+    id: what
+    attributes:
+      label: What happened?
+      description: What did you expect, and what happened instead?
+    validations:
+      required: true
+  - type: textarea
+    id: repro
+    attributes:
+      label: Steps to reproduce
+      placeholder: |
+        1. Add IAMX component to...
+        2. Press Play...
+        3. ...
+  - type: textarea
+    id: logs
+    attributes:
+      label: Logs
+      description: Relevant lines from Saved/Logs/<Project>.log (LogIAMX entries help most)
+      render: text

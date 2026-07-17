@@ -1,0 +1,15 @@
+name: Feature request
+description: Suggest an improvement for the IAMX plugin
+labels: [enhancement]
+body:
+  - type: textarea
+    id: idea
+    attributes:
+      label: What would you like IAMX to do?
+    validations:
+      required: true
+  - type: textarea
+    id: usecase
+    attributes:
+      label: What are you building?
+      description: Game NPC, kiosk, virtual assistant, influencer, something else — context helps us prioritize.
