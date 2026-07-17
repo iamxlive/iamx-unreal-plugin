@@ -50,7 +50,7 @@
 | 📖 | **Narrative / Scenario design** | A no-code visual graph editor for goals, decisions and branching, mission-driven dialogue. |
 | 📚 | **Knowledge base (RAG)** | Your character answers from *your* documents, not the open internet. |
 | 🙋 | **Long-term memory** | Recognizes returning people and remembers past sessions — across days, not turns. |
-| ⚡ | **Actions** | Function calling into your APIs and your Blueprints — bookings, lookups, e-mail, calendar, in-game behavior. |
+| ⚡ | **Actions in your world** | *"Go grab that axe"* / *"play the wave animation"* — it walks, fetches, follows and plays animations on command, and can also call your APIs (bookings, lookups, e-mail). |
 | 📡 | **Live streaming** | Run your character as an always-on AI stream host with a moderated queue and operator console. |
 | 🎙️ | **Podcast mode** | Two characters hold an unscripted conversation with each other — on any topic you set. |
 | 👥 | **Multi-character scenes** | Several characters per level; only the one you're near answers. They can even talk to each other. |
@@ -122,14 +122,40 @@ Perfect for guided sales flows, museum & showroom tours, quest-giving NPCs, onbo
 - **Long-term memory:** the character summarizes each session and remembers returning visitors — *"Welcome back! Last time you asked about pricing…"* — across days, not just the current chat.
 - **Face recognition** *(paid plans)*: on kiosks, it recognizes returning people by face and greets them by name.
 
-## ⚡ Actions — a character that *does* things
+## ⚡ Actions — a character that *does* things, not just says them
 
-IAMX characters can take real action, in two directions:
+Two directions: your character can **act inside your world**, and it can **reach into your systems**.
 
-- **Into your APIs** — define HTTP GET/POST actions in the panel; the AI decides when to call them and answers naturally with the result (weather, stock, order status, your backend).
-- **Into your Unreal project** — define **custom actions from Blueprint** (`Register Action`) and the AI triggers them in-world: move to, follow, play an animation, open a door, whatever you wire up.
+### 🌍 Act in your world — action-driven scenarios
+
+This is the fun part. Talk to your character in plain language and it **physically responds in the level** — walks, fetches, follows, plays animations, triggers your game logic. No dialogue trees, no command syntax — it understands intent.
+
+> **You:** *"Hey, go grab that axe on the table."*
+> → the character turns, walks over to the axe, and picks it up.
+
+> **You:** *"Do a little victory dance."*
+> → it plays your victory animation.
+
+Three pieces you wire once, then it just works:
+
+1. **Tell it what's around it** — register the things it can act on:
+   `Register Scene Actor(AxeActor, "a battle axe on the table")`. Now the AI knows what *"the axe"* means and which actor it maps to. (`Register Scene Object`, `Set Attention Object` do the same for props and focus.)
+2. **Give it abilities** — movement is **built in** and ready out of the box (**move to / follow / stop / wait**). Add your own game-specific actions with `Register Action` at runtime (or the **Local Action Tools** list in the editor's details panel) — `pick_up`, `play_animation`, `open_door`, `cast_spell`, whatever your game needs.
+3. **Implement the payoff in Blueprint** — the AI decides *when* to act and *on what target*, then fires a Blueprint event with the resolved actor already plugged in:
+   - `On Action Move To (Target, "axe")` → drive your nav / `AI MoveTo`.
+   - `On Action Custom ("pick_up", params, Target, "axe")` → attach the axe to the hand.
+   - `On Action Custom ("play_animation", {"name":"victory"}, …)` → play the montage (or just call `Play Gesture`).
+
+The whole **natural language → intent → target actor → Blueprint call** chain is handled for you — you only implement what each action actually *does*. Every decoded action also lands in an inspectable **Action Queue** and fires `On Action Received`, so you can sequence, gate or animate around them.
+
+> ✅ **No server or panel setup** — actions you define in your own project are sent to the AI when the session starts and come straight back to your Blueprints. Works the same in cloud mode, without touching the studio.
+
+### 🔌 Reach into your systems
+
+- **Your APIs:** define HTTP GET/POST actions in the panel; the AI calls them when relevant and answers naturally with the result (weather, stock, order status, your backend).
 - **Assistant actions:** e-mail, calendar, Telegram and WhatsApp out of the box.
-- **Everything is an event:** replies, sentences, transcriptions, actions and lifecycle moments all fire Blueprint delegates, so your game logic can react to anything the character says or does. See the [Blueprint API](#-blueprint-api-quick-reference) below.
+
+> **Everything is an event:** replies, sentences, transcriptions, actions and lifecycle moments all fire Blueprint delegates, so your game logic can react to anything the character says or does. See the [Blueprint API](#-blueprint-api-quick-reference) below.
 
 ## 📡 Live streaming & podcast mode
 
