@@ -58,17 +58,31 @@ Everything is configured live from the **[IAMX panel](https://iamx.live)** — p
 
 ### 1 — Get the plugin
 
-Download the ZIP for your engine version from **[Releases](../../releases)**, then extract the `IAMX` folder into your project's `Plugins/` directory:
+Download the ZIP matching your engine version from **[Releases](../../releases)**:
+
+| Engine | Package |
+|--------|---------|
+| UE 5.3 | `IAMX_UE5_3_Win64.zip` |
+| UE 5.4 | `IAMX_UE5_4_Win64.zip` |
+| UE 5.5 | `IAMX_UE5_5_Win64.zip` |
+| UE 5.6 | `IAMX_UE5_6_Win64.zip` |
+| UE 5.7 | `IAMX_UE5_7_Win64.zip` |
+| UE 5.8 | `IAMX_UE5_8_Win64.zip` |
+
+Extract the `IAMX` folder into your project's `Plugins/` directory (create it if it doesn't exist):
 
 ```
 YourProject/
 └── Plugins/
     └── IAMX/
         ├── IAMX.uplugin
+        ├── Binaries/      ← prebuilt, ready to run
         └── Source/
 ```
 
-Open the project — Unreal will offer to compile the plugin (a C++ project is required; for a Blueprint-only project, add one empty C++ class first via **Tools → New C++ Class**). Also available on **Fab**.
+Open the project — that's it. **The packages ship prebuilt Win64 binaries, so no compiler or Visual Studio is needed, and Blueprint-only projects work out of the box.** (Full source is included too — C++ projects can rebuild or step through it freely.) Also available on **Fab**.
+
+> ⚠️ The ZIP must match your engine version exactly — a 5.3 package won't load in 5.4.
 
 ### 2 — Create your character (2 minutes)
 
@@ -122,7 +136,7 @@ Press **T** (default, configurable) and talk. Or enable **voice-activated** / **
 
 ## 📋 Requirements
 
-- Unreal Engine **5.3 – 5.8** (Win64), C++ project
+- Unreal Engine **5.3 – 5.8** (Win64) — Blueprint-only projects supported (binaries are prebuilt)
 - A free **[iamx.live](https://iamx.live)** account
 - A microphone
 
