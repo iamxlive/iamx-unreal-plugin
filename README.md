@@ -1,75 +1,151 @@
-# IAMX — AI Digital Humans for Unreal Engine
+<p align="center">
+  <img src="docs/banner.png" alt="IAMX — AI Digital Humans for Unreal Engine" width="100%">
+</p>
 
-**Free Unreal Engine plugin for real-time, conversational AI digital humans and MetaHuman avatars** — game AI NPCs, virtual assistants, interactive kiosks and virtual influencers that see, talk and remember.
+<h1 align="center">Bring your characters to life.</h1>
 
-[![Website](https://img.shields.io/badge/website-iamx.live-6d8bff)](https://iamx.live)
-[![Panel](https://img.shields.io/badge/control%20panel-iamx.live-a468ff)](https://iamx.live)
-[![Unreal Engine](https://img.shields.io/badge/Unreal%20Engine-5.3%20–%205.8-313131)](#installation)
+<p align="center">
+  <b>IAMX turns any MetaHuman into a living, thinking digital human</b> — one that hears you, looks you in the eye,<br>
+  answers in real time with perfectly synced lips, remembers you tomorrow, and can actually <i>do</i> things.
+</p>
 
-IAMX turns any MetaHuman (or your own character rig) into a live digital human:
+<p align="center">
+  <a href="https://iamx.live"><img src="https://img.shields.io/badge/🌐_website-iamx.live-6d8bff?style=for-the-badge" alt="Website"></a>
+  <a href="../../releases"><img src="https://img.shields.io/badge/⬇_download-v1_alpha-a468ff?style=for-the-badge" alt="Download"></a>
+  <a href="../../issues"><img src="https://img.shields.io/badge/💬_feedback-wanted!-2ea043?style=for-the-badge" alt="Feedback"></a>
+</p>
 
-- 🗣️ **Real-time two-way voice conversation** — streamed replies, interruptible (barge-in), 30+ languages
-- 👄 **Real-time lip sync** — the character's mouth and face move in sync with every word
-- 🧠 **Pick your AI model per character** — GPT, Claude, Gemini (incl. Gemini Live realtime), local Ollama
-- 👀 **Camera vision** — the character sees and reacts to what's in front of it
-- 🙋 **Face recognition & long-term memory** — greets returning people by name, remembers past sessions
-- 📚 **Knowledge base (RAG)** — grounds answers in your own PDF/TXT/CSV documents
-- 🎭 **Emotion engine** — mood drives facial expression, voice tone and gestures
-- ⚡ **Actions** — function calling into your own APIs, e-mail, calendar, messaging
-- 🖥️ **Every surface** — in-game NPCs, kiosks, web embed, live streams, cloud-streamed MetaHumans
-
-The plugin is a lightweight client for the IAMX cloud. **Create your free account and your first character at [iamx.live](https://iamx.live)** — a free Starter plan is included; Pro/Enterprise plans unlock face recognition, memory, RAG, pixel streaming and more.
+<p align="center">
+  <img src="https://img.shields.io/badge/Unreal_Engine-5.3_·_5.4_·_5.5_·_5.6_·_5.7_·_5.8-313131?logo=unrealengine" alt="UE versions">
+  <img src="https://img.shields.io/badge/price-free-2ea043" alt="Free">
+  <img src="https://img.shields.io/badge/platform-Win64-blue" alt="Win64">
+</p>
 
 ---
 
-## Installation
+> ### ⚠️ v1 **ALPHA**
+> This is the first public release of IAMX. It works — we use it in production kiosks and live streams — but you *will* find rough edges.
+> **Your feedback genuinely shapes this product.** Every bug report and feature request gets read: [open an issue](../../issues/new/choose) — it matters more than you think. 💜
 
-1. Download the ZIP matching your engine version from **[Releases](../../releases)**:
+---
 
-   | Engine | Package |
-   |--------|---------|
-   | UE 5.3 | `IAMX_5_3_Fab.zip` |
-   | UE 5.4 | `IAMX_5_4_Fab.zip` |
-   | UE 5.5 | `IAMX_5_5_Fab.zip` |
-   | UE 5.6 | `IAMX_5_6_Fab.zip` |
-   | UE 5.7 | `IAMX_5_7_Fab.zip` |
-   | UE 5.8 | `IAMX_5_8_Fab.zip` |
+## ✨ What you get
 
-2. Extract the `IAMX` folder into your project's `Plugins/` directory:
-   ```
-   YourProject/
-   └── Plugins/
-       └── IAMX/
-           ├── IAMX.uplugin
-           ├── Source/
-           └── ...
-   ```
-3. Open the project — Unreal will ask to compile the plugin (requires a C++ project; for Blueprint-only projects add an empty C++ class first).
-4. Enable **Edit → Plugins → IAMX** if it isn't already, and restart the editor.
+| | Feature | What it means |
+|---|---------|---------------|
+| 🗣️ | **Real-time voice conversation** | Two-way, streamed, interruptible (barge-in). Speak — it answers in seconds, in 30+ languages. |
+| 👄 | **Real-time lip sync** | The character's mouth and full facial performance follow every word — on MetaHumans or your own custom rig. |
+| 👁️ | **Eye & head tracking** | The character finds your camera and holds eye contact while you talk, like a person would. |
+| 🧠 | **Your choice of AI brain** | GPT, Claude, Gemini (including Gemini Live realtime) or local Ollama — swappable per character from the panel. |
+| 📷 | **Camera vision** | The character sees through a camera and reacts to what's in front of it. |
+| 🙋 | **Memory that persists** | Recognizes returning people, summarizes past sessions, greets visitors by name — across days, not turns. |
+| 📚 | **Knowledge base (RAG)** | Upload PDF / TXT / CSV — your character answers from *your* documents, not the open internet. |
+| 🎭 | **Emotion engine** | An 8-dimensional emotional core drives facial expression, voice tone and gestures. Mood shifts as the conversation does. |
+| ⚡ | **Actions** | Function calling into your own APIs — bookings, lookups, e-mail, calendar, messaging. The character *does*, not just says. |
+| 🎮 | **Interaction modes** | Push-to-talk, voice-activated, wake word, or proximity — walk up to an NPC and just start talking; walk away and it stops listening. |
+| 👥 | **Multi-NPC scenes** | Several characters in one level, each with its own personality; only the one you're near answers. NPC-to-NPC conversations too. |
+| 📖 | **Scenario studio** | A no-code visual graph editor for goals, decisions and branching dialogue. |
+| 💬 | **Built-in chat UI** | Optional on-screen chat panel with mic button, live transcription and streamed replies. |
+| 🖥️ | **Every surface** | The same character runs as a game NPC, a 24/7 kiosk, a one-line web embed, or a cloud-streamed MetaHuman. |
 
-> Also available on **Fab** for one-click install.
+Everything is configured live from the **[IAMX panel](https://iamx.live)** — personality, voice, AI model, features. No rebuilds, no redeploys: save in the panel, see it in the next reply.
 
-## Quick start
+> 🧩 **How it works:** the plugin is a lightweight client. All AI runs in the IAMX cloud and streams back to Unreal — your project stays lean, your machine stays cool, and every character update ships server-side without touching your build.
 
-1. Sign up at [iamx.live](https://iamx.live) and create a character in the panel (personality, voice, AI model, features).
-2. In your level, select your MetaHuman (or custom character) and **Add Component → IAMX**.
-3. Paste your character's **ID / token** from the panel into the component.
-4. Press Play. Press **T** (default) to talk — or enable voice-activated / proximity modes on the component.
+---
 
-Your character's behavior, voice, model and features are all managed live from the [panel](https://iamx.live) — no rebuilds needed.
+## 🚀 Installation
 
-## Requirements
+### 1 — Get the plugin
 
-- Unreal Engine 5.3 – 5.8 (Win64)
-- A free IAMX account ([iamx.live](https://iamx.live))
-- A microphone for voice interaction
+Download the ZIP for your engine version from **[Releases](../../releases)**, then extract the `IAMX` folder into your project's `Plugins/` directory:
 
-## Support
+```
+YourProject/
+└── Plugins/
+    └── IAMX/
+        ├── IAMX.uplugin
+        └── Source/
+```
 
-- 🐛 [Report a bug](../../issues/new?template=bug_report.yml)
-- 💡 [Request a feature](../../issues/new?template=feature_request.yml)
-- 🌐 [iamx.live](https://iamx.live)
+Open the project — Unreal will offer to compile the plugin (a C++ project is required; for a Blueprint-only project, add one empty C++ class first via **Tools → New C++ Class**). Also available on **Fab**.
 
-## License
+### 2 — Create your character (2 minutes)
 
-Free to use with the IAMX service — see [LICENSE](LICENSE.md).
+1. Sign up free at **[iamx.live](https://iamx.live)**.
+2. Create a character: personality, voice, language, AI model, features.
+3. Copy the character's connection ID from the panel.
+
+### 3 — Wire up your MetaHuman
+
+1. Drop a MetaHuman into your level.
+2. Select it → **Add Component → IAMX**.
+3. Paste your character's connection ID into the IAMX component.
+
+### 4 — Add the animation nodes
+
+The plugin ships three AnimGraph nodes (search for **"IAMX"** in any AnimGraph's right-click menu):
+
+**Face Animation Blueprint** (e.g. `Face_AnimBP`) — add **two** nodes into the AnimGraph, chained before the Output Pose:
+
+```
+[Input / existing pose] → [IAMX Lip Sync] → [IAMX Eye Look At] → [Output Pose]
+```
+
+- **IAMX Lip Sync** — applies the streamed facial controls (mouth, jaw, expressions) on top of the incoming pose.
+- **IAMX Eye Look At** — makes the eyes find and track the player's camera during conversation.
+
+**Body Animation Blueprint** (the MetaHuman's body AnimBP) — add **one** node the same way:
+
+```
+[Input / existing pose] → [IAMX Head Look At] → [Output Pose]
+```
+
+- **IAMX Head Look At** — turns the head (with natural limits and smoothing) toward the player while talking.
+
+> 💡 Both edits are non-destructive: the IAMX nodes blend on top of whatever animation is already playing (idle, talk gestures, your own state machines).
+
+### 5 — Press Play
+
+Press **T** (default, configurable) and talk. Or enable **voice-activated** / **proximity** mode on the component and just walk up to your character.
+
+---
+
+## 🎛️ Interaction modes
+
+| Mode | Behavior |
+|------|----------|
+| **Push-to-talk** | Hold/press a key to speak (default `T`). |
+| **Voice-activated** | Always listening; detects when you start and stop speaking. |
+| **Wake word** | Sleeps until it hears its name ("Hey Alara…"). |
+| **Proximity** | Add a radius — the NPC only listens to the player standing near it. Perfect for multi-NPC levels. |
+
+## 📋 Requirements
+
+- Unreal Engine **5.3 – 5.8** (Win64), C++ project
+- A free **[iamx.live](https://iamx.live)** account
+- A microphone
+
+## 🐞 Known alpha limitations
+
+- Win64 only (other platforms on the roadmap)
+- MetaHuman rigs are first-class; custom rigs work via blend-shape mapping but need manual setup
+- Documentation is still growing — when in doubt, [ask](../../issues)
+
+---
+
+## 💬 Feedback — seriously, we want it
+
+This is an alpha. The fastest way to get a feature or a fix is to tell us:
+
+- 🐛 **[Report a bug](../../issues/new?template=bug_report.yml)** — engine version + logs = fixed fast
+- 💡 **[Request a feature](../../issues/new?template=feature_request.yml)** — tell us what you're building
+- ⭐ **Star the repo** if this is useful — it genuinely helps others find it
+
+## 📄 License
+
+Free to use, including commercially, with the IAMX service — see [LICENSE](LICENSE.md).
+
+<p align="center">
+  <sub>Built with obsession by <a href="https://iamx.live">IAMX Interactive</a> · <a href="https://iamx.live">iamx.live</a></sub>
+</p>
