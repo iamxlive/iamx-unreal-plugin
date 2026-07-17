@@ -157,6 +157,13 @@ Download the ZIP matching your engine version from **[Releases](../../releases)*
 | UE 5.7 | `IAMX_UE5_7_Win64.zip` |
 | UE 5.8 | `IAMX_UE5_8_Win64.zip` |
 
+> ### 🔓 Windows: unblock the ZIP first (important!)
+> Files downloaded from the internet are tagged "blocked" by Windows, which can stop Unreal from loading the plugin's binaries (symptom: text works but **no voice and no lip sync**). **Before extracting**, right-click the ZIP → **Properties** → tick **Unblock** → OK.
+> Already extracted? Run this once in PowerShell inside the extracted `IAMX` folder:
+> ```powershell
+> Get-ChildItem -Recurse | Unblock-File
+> ```
+
 Extract the `IAMX` folder into your project's `Plugins/` directory (create it if it doesn't exist):
 
 ```
